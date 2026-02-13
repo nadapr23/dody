@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dody 💗</title>
+
+<style>
+body{
+margin:0;
+font-family: system-ui;
+background: linear-gradient(135deg,#ffd7e6,#ffeaf2);
+overflow:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+@keyframes floatUp{
+from{
+transform:translateY(0);
+opacity:1;
+}
+to{
+transform:translateY(-120vh);
+opacity:0;
+}
+}
+
+/* خلفية i love you */
+.bg{
+position:fixed;
+inset:0;
+opacity:.08;
+font-size:40px;
+font-weight:900;
+transform:rotate(-20deg);
+white-space:pre;
+pointer-events:none;
+}
+
+/* شاشة عامة */
+.screen{
+position:absolute;
+inset:0;
+display:none;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+gap:20px;
+}
+.show{display:flex}
+
+/* العنوان */
+h1{
+margin:0;
+font-size:32px;
+font-weight:900;
+}
+
+/* الظرف */
+.envelope{
+width:360px;
+height:230px;
+background:linear-gradient(#ff7fb5,#ff4f99);
+border-radius:20px;
+position:relative;
+cursor:pointer;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+font-weight:800;
+box-shadow:0 15px 40px rgba(0,0,0,.2);
+}
+
+/* الكرت */
+.card{
+width:320px;
+background:#fff;
+border-radius:18px;
+padding:20px;
+text-align:center;
+line-height:1.8;
+font-weight:800;
+box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+/* ازرار */
+.btns{
+display:flex;
+gap:15px;
+}
+.mainPhoto{
+  width:350px;
+  border-radius:20px;
+  position:relative;
+  z-index:5;   /* يخلي الصورة فوق القلوب */
+}
+
+button{
+padding:10px 18px;
+border:none;
+border-radius:999px;
+font-weight:900;
+cursor:pointer;
+font-size:16px;
+transition:.2s;
+}
+
+.yes{
+background:#ff2d7f;
+color:white;
+}
+
+.no{
+background:white;
+border:2px solid #ccc;
+}
+
+button:active{
+transform:scale(.95);
+}
+
+/* قلوب تطير */
+.heart{
+position:absolute;
+font-size:20px;
+animation:fly 1.5s forwards;
+}
+@keyframes fly{
+from{transform:translateY(0);opacity:1}
+to{transform:translateY(-200px);opacity:0}
+}
+
+/* اوتش */
+.overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.7);
+display:none;
+justify-content:center;
+align-items:center;
+color:white;
+font-size:40px;
+font-weight:900;
+}
+.overlay.show{display:flex}
+
+/* شاشة القلب */
+canvas{
+background:#0b0610;
+border-radius:20px;
+}
+.photo{
+margin-top:20px;
+display:none;
+}
+.photo img{
+width:260px;
+border-radius:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg" id="bg"></div>
+
+<!-- شاشة 1 -->
+<div class="screen show" id="s1">
+<h1>Dody will you be my valentine?</h1>
+
+<div class="envelope">Do You Love Nony? 💌</div>
+
+<div class="btns">
+<button class="yes" id="yes1">Yes</button>
+<button class="no" id="no1">No</button>
+</div>
+</div>
+
+<!-- شاشة 2 -->
+<div class="screen" id="s2">
+<div class="card">
+حبيب القلب والروح والعين عزيزي عبدالله  
+انا ااحححبببببببككككككككككك  
+الحمدلله على نعمتك بحياتي  
+الحمدلله على حبك ، انام واصحى وانا احبك اكثر واككثثثر  
+كل سنة وانت my valentine 🥺❤️❤️❤️  
+
+<br><br>
+Do you want see my heart?
+</div>
+
+<div class="btns">
+<button class="yes" id="yes2">Yes</button>
+<button class="no" id="no2">No</button>
+</div>
+</div>
+
+<!-- شاشة 3 -->
+<div class="screen" id="s3">
+  <img src="abdullah.jpg" class="mainPhoto">
+</div>
+
+
+<div class="overlay" id="ouch">ouch it’s heart 😔</div>
+
+<script>
+
+/* خلفية */
+let text="";
+for(let i=0;i<20;i++) text+="i love you   ";
+document.getElementById("bg").innerText=text;
+
+/* تنقل شاشات */
+function show(id){
+document.querySelectorAll(".screen").forEach(s=>s.classList.remove("show"));
+document.getElementById(id).classList.add("show");
+}
+
+/* قلوب */
+function hearts(){
+for(let i=0;i<15;i++){
+let h=document.createElement("div");
+h.className="heart";
+h.innerText="❤️";
+h.style.left=Math.random()*100+"vw";
+h.style.top="70vh";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),1500);
+}
+}
+
+/* زر نعم الاول */
+document.getElementById("yes1").onclick=()=>{
+hearts();
+show("s2");
+}
+
+/* زر لا يهرب */
+let noBtn=document.getElementById("no1");
+noBtn.onmouseover=()=>{
+noBtn.style.position="absolute";
+noBtn.style.left=Math.random()*80+"vw";
+noBtn.style.top=Math.random()*80+"vh";
+}
+
+/* زر نعم الثاني */
+document.getElementById("yes2").onclick=()=>{
+show("s3");
+drawHeart();
+}
+
+/* زر لا الثاني */
+document.getElementById("no2").onclick=()=>{
+let o=document.getElementById("ouch");
+o.classList.add("show");
+setTimeout(()=>o.classList.remove("show"),1500);
+}
+
+/* رسم القلب */
+// لما تفتح شاشة الصورة
+document.getElementById("yes2").onclick=()=>{
+show("s3");
+startHearts();
+}
+
+function startHearts(){
+setInterval(()=>{
+createHeart();
+},200);
+}
+
+function createHeart(){
+let heart=document.createElement("div");
+heart.innerText="❤️";
+heart.style.position="fixed";
+heart.style.zIndex="1";  // القلوب تحت الصورة
+heart.style.left=Math.random()*100+"vw";
+heart.style.top="100vh";
+heart.style.fontSize=(20+Math.random()*30)+"px";
+heart.style.animation="floatUp 4s linear forwards";
+heart.style.filter="drop-shadow(0 0 10px #ff2d7f)";
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),4000);
+}
+
+</script>
+</body>
+</html>
